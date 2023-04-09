@@ -5,7 +5,7 @@ const { createUser, login } = require('../Controllers/userController')
 const { createProduct, getAllProducts, getProductsById } = require('../Controllers/productController')
 
 //USER
-router.post('/users', createUser)
+router.post('/signup', createUser)
 router.post('/login', login)
 
 //product
