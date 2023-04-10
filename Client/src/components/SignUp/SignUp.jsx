@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './SignUp.css'
 
@@ -28,7 +27,7 @@ const SignUp = () => {
             });
 
             if (response.ok) {
-                alert('SignIn form submitted successfully!')
+                alert('SignUp form submitted successfully!')
                 navigate('/signin')
                 console.log('Form data submitted successfully!');
             } else {
@@ -41,28 +40,34 @@ const SignUp = () => {
         }
     };
 
+    function handleSignInSubmit() {
+        navigate('/signin');
+    }
+
     return (
-        <>
+        <div className="form-container">
+            <form className='form' onSubmit={handleSubmit}>
+                <div className='title'>
+                    <h1 className='text' >Signup</h1>
+                </div>
+                <div className='Inputs'>
+                    <label className='NameLabel' htmlFor="name">Name :</label>
+                    <input className='NameInput' type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
 
-            <div className="signup-form">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <label className='emailLabel' htmlFor="email">Email :</label>
+                    <input className='emailInput' type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <label className='phoneLabel' htmlFor="phone">Phone :</label>
+                    <input className='phoneinput' type="tel" id="phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
 
-                    <label htmlFor="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-
-                    <button type="submit">Sign Up</button>
-                </form>
-            </div>
-
-        </>
+                    <label className='passLabel' htmlFor="password">Password :</label>
+                    <input className='passinput' type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+                <button className='submitButton' type="submit">Sign Up</button>
+                <h4>Already have an account.</h4>
+                <button className='newreg1' onClick={handleSignInSubmit}>Signin Here</button>
+            </form>
+        </div>
     );
 };
 

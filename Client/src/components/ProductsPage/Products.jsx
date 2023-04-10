@@ -19,7 +19,7 @@ const Products = () => {
     const exploreHandler = (product) => {
         navigate('/products/product', { state: { product: product } });
     }
-    
+
 
     return (
         <div className="container">
@@ -29,8 +29,8 @@ const Products = () => {
                         <div className="card h-100" key={product.id}>
                             <img src={product.productImage} className="card-img" alt="..." />
                             <div className="card-body">
-                                <h5 className="card-title">{product.title}</h5>
-                                <p className="card-text">{product.price}</p>
+                                <h5 className="card-title">Title : {product.title}</h5>
+                                <p className="card-text">Price : {product.price}</p>
                                 <button className="btn btn-primary" onClick={() => exploreHandler(product)}>Explore More</button>
                             </div>
                         </div>

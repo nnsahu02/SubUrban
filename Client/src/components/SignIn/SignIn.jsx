@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 import './SignIn.css'
 
 const SignIn = () => {
@@ -25,7 +25,9 @@ const SignIn = () => {
             });
 
             if (response.ok) {
-                Cookies.set('token', token);
+                let tokenData = await response.json()
+                console.log(tokenData.token)
+                localStorage.setItem("token", tokenData.token)
                 alert('successfully loggedIn');
                 navigate('/products');
             } else {
@@ -42,19 +44,21 @@ const SignIn = () => {
     }
 
     return (
-        <div className="SignIn">
-            <h2 className='title'>Sign In</h2>
+        <div className="form-container">
             <form className='form' onSubmit={handleSubmit}>
-                <div>
-                    <label className='email' htmlFor="email">Email</label>
+                <div className='title'>
+                    <h1 className='text' >SignIn</h1>
+                </div>
+                <div className='Inputs'>
+                    <label className='emailLabel' htmlFor="email">Email :</label>
                     <input className='emailInput' type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-                    <label className='password' htmlFor="password">Password</label>
-                    <input className='passwordInput' type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <label className='passLabel' htmlFor="password">Password :</label>
+                    <input className='passinput' type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button className='submit' type="submit">Sign In</button>
-                <h3>New user</h3>
-                <button className='newreg' onClick={handleRegisterSubmit}>Register Here</button>
+                <button className='submitButton' type="submit">Sign In</button>
+                <h4>New user ?</h4>
+                <button className='newreg1' onClick={handleRegisterSubmit}>Register Here</button>
             </form>
         </div>
     );

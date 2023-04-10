@@ -1,21 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css'
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/signin')
+  }
+
+  const token = localStorage.getItem('token');
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link className="navbar-logo">
           Suburban
         </Link>
         <div className="navbar-buttons">
-          <Link to="/signin" className="navbar-button">
-            SignIn
-          </Link>
-          <Link to="/signup" className="navbar-button">
-            SignUp
-          </Link>
+          {token ? (
+            <button className="navbar-button" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/signin" className="navbar-button">
+                SignIn
+              </Link>
+              <Link to="/signup" className="navbar-button">
+                SignUp
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
@@ -23,4 +41,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
